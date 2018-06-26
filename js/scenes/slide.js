@@ -1,4 +1,6 @@
 var arrSlides = [
+  // Slide 1
+
   {
     preload:function(){
       game.load.image('logic','media/logic.png');
