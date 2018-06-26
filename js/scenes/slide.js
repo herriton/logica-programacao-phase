@@ -27,10 +27,9 @@ var arrSlides = [
       this.stage.backgroundColor = '#0072bc';
       this.stage.smoothed = false;
 
-      //small: {font: 'bold 12px Arial', fill: 'white', align: 'center', wordWrap: true, wordWrapWidth: 450 },
-      var sprLogic = this.add.sprite(this.world.centerX, 365, 'logic');
-      sprLogic.scale.setTo(.5);
-      sprLogic.anchor.x = .5;
+      var oLogic = this.add.sprite(this.world.centerX, 365, 'logic');
+      oLogic.scale.setTo(.5);
+      oLogic.anchor.x = .5;
 
       addContent(arrContent);
     },
@@ -53,8 +52,8 @@ var arrSlides = [
     },
 
     create : function(){
-      oRoomOFF = game.add.sprite(0,0,'room-light-off');
-      oRoomON = game.add.sprite(0,0,'room-light-on');
+      oRoomOFF = game.add.sprite(0, 0, 'room-light-off');
+      oRoomON = game.add.sprite(0, 0, 'room-light-on');
 
       oRoomON.visible = false;
 
@@ -64,7 +63,7 @@ var arrSlides = [
       oRoomOFF.height = game.stage.height;
       oRoomOFF.width = game.stage.width;
 
-      oInterruptor = game.add.button(150,400, 'interruptor', this.onClick);
+      oInterruptor = game.add.button(150, 400, 'interruptor', this.onClick);
       oInterruptor.isOn = oInterruptor.frame == 2;
       oInterruptor.frame = 1;
 
@@ -122,17 +121,18 @@ var arrSlides = [
           }
         break;
       }
-      //debugger;
     },
 
     update : function(){
       var oKeys = { right: this.input.keyboard.justPressed(Phaser.Keyboard.RIGHT), left: this.input.keyboard.justPressed(Phaser.Keyboard.LEFT) }
+
       if(oKeys.right || oKeys.left) {
         delete oInterruptor;
         delete oRoomOFF;
         delete oRoomON;
         delete oLight;
       }
+
       if(oKeys.right) this.state.start('Slide Three');
       if(oKeys.left) this.state.start('Slide One');
     }
