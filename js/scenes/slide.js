@@ -103,11 +103,15 @@ var arrSlides = [
               oInterruptor.isOn = !oInterruptor.isOn;
               oInterruptor.frame = 2;
 
+              oLight.frame = 3;
+
               oRoomON.visible  = true;
               oRoomOFF.visible = false;
             } else {
               oInterruptor.isOn = !oInterruptor.isOn;
               oInterruptor.frame = 1;
+
+              oLight.frame = 2;
 
               oRoomON.visible  = false;
               oRoomOFF.visible = true;
