@@ -40,16 +40,134 @@ var arrSlides = [
       if(oKeys.right) this.state.start('Slide Two');
     }
   },
+
+  //Slide 2
+
   {
-    preload:function(){},
+    preload:function(){
+      game.load.image('room-light-off','media/room-light-off1.jpg');
+      game.load.image('room-light-on','media/room-light-on1.jpg');
+
+      game.load.spritesheet('interruptor','media/interruptor.png',28,36);
+      game.load.spritesheet('light','media/light1.png',75,180);
+
+    },
+
+
 
     create : function(){
+          game.add.sprite(0,0,'room-light-off');
 
-      this.stage.backgroundColor = '#FF0000';
+          //var interrupt = game.add.sprite(150,400,'interruptor');
 
-      var arrContent = [
-        { text: "Slide 2", posX: this.world.centerX, posY: game.world.centerY, type:"title" },
-      ]
+          var interrupt = game.add.button(150,400, 'interruptor', interruptOnclick, 0);
+          var light;
+          var light2;
+
+      function up() {
+        console.log('button up', arguments);
+      }
+
+      function over() {
+        console.log('button over');
+      }
+
+      function out() {
+        console.log('button out');
+      }
+
+      function interruptOnclick () {
+
+          if(light.frame == 2 && interrupt.frame == 0){
+
+            interrupt.pendingDestroy = true;
+
+            game.add.sprite(0,0,'room-light-on');
+            var interruptOff = game.add.button(150,400, 'interruptor', interruptOffclick, 0);
+            interruptOff.frame = 1;
+
+            function up() {
+              console.log('button up', arguments);
+            }
+
+            function over() {
+              console.log('button over');
+            }
+
+            function out() {
+              console.log('button out');
+            }
+
+            function interruptOffclick () {
+                interrupt.pendingDestroy = true;
+
+                game.add.sprite(0,0,'room-light-off');
+                interruptOff = game.add.button(150,400, 'interruptor', interruptOnclick, 0);
+                interruptOff.frame = 0;
+
+            }
+
+              light2 = game.add.button(625,0, 'light', lightonclick, 0);
+              light2.frame = 3;
+
+              function up() {
+                console.log('button up', arguments);
+              }
+
+              function over() {
+                console.log('button over');
+              }
+
+              function out() {
+                console.log('button out');
+              }
+
+              function lightonclick () {
+
+              }
+
+
+          }else if(light.frame != 2 && interrupt.frame == 0){
+
+            interrupt.frame = 1;
+
+          }else if(light.frame != 2 && interrupt.frame == 1){
+
+            interrupt.frame = 0;
+          }else if(light.frame == 2 && interrupt.frame == 1){
+
+            interrupt.frame = 0;
+          }
+
+      }
+
+      light = game.add.button(625,0, 'light', lightoffclick, 0);
+
+      function up() {
+        console.log('button up', arguments);
+      }
+
+      function over() {
+        console.log('button over');
+      }
+
+      function out() {
+        console.log('button out');
+      }
+
+      function lightoffclick () {
+
+        switch (light.frame) {
+        case 0:
+          light.frame = 1;
+        break;
+        case 1:
+          light.frame = 2;
+        break;
+
+        }
+
+      }
 
       addContent(arrContent);
     },
